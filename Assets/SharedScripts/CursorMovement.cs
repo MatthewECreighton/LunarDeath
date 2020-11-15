@@ -20,7 +20,7 @@ public class CursorMovement : MonoBehaviour
         if (hits.Length == 1 && hits[0].transform.tag == "Space") 
         {
             var hitPosition = hits[0].point;
-            transform.position = hitPosition;
+            transform.position = new Vector3(hitPosition.x, hitPosition.y, 4);
         }
     }
 }
