@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5677299985429694796}
   - component: {fileID: 5677299985429694799}
   - component: {fileID: 5677299985429694798}
+  - component: {fileID: 7239113559981606364}
   m_Layer: 0
   m_Name: MoonObj
   m_TagString: Untagged
@@ -109,3 +110,17 @@ MonoBehaviour:
   innerSphere: {fileID: 5677299985429694792}
   outerSphereObj: {fileID: 6015239242882638164, guid: 94bba75e0d0057d45b46aae47bb7dc5b,
     type: 3}
+--- !u!114 &7239113559981606364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5677299985429694792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c641fbc1dd774ac42abafa91546978f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exp: {fileID: 0}
+  expPlace: {fileID: 0}
