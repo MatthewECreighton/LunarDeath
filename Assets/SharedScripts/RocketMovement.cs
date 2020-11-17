@@ -26,10 +26,14 @@ public class RocketMovement : MonoBehaviour
             // rotation
             var vectorBetweenObjects = objectToFollow.position - transform.position;
             var normalizedDirection = vectorBetweenObjects.normalized;
-            var rotatedDirection = Quaternion.Euler(0, 0, -90) * normalizedDirection;
+            var rotatedDirection = Quaternion.Euler(0, 0, 270) * normalizedDirection;
 
             var lookRotation = Quaternion.LookRotation(rotatedDirection);
             transform.rotation = lookRotation;
+            
+            Debug.Log(vectorBetweenObjects);
+
+            // transform.LookAt(objectToFollow.transform, Vector3.up);
         }
 
         // left mouse click
