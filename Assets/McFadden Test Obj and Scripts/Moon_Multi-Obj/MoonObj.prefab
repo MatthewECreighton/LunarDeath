@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5677299985429694799}
   - component: {fileID: 5677299985429694798}
   - component: {fileID: 7239113559981606364}
+  - component: {fileID: 974317616}
   m_Layer: 0
   m_Name: MoonObj
   m_TagString: Untagged
@@ -28,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5677299985429694792}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 12}
   m_LocalScale: {x: 18, y: 18, z: 18}
   m_Children: []
@@ -108,8 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   innerSphere: {fileID: 5677299985429694792}
-  outerSphereObj: {fileID: 6015239242882638164, guid: 94bba75e0d0057d45b46aae47bb7dc5b,
-    type: 3}
+  outerSphereObj: {fileID: 0}
 --- !u!114 &7239113559981606364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,3 +124,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exp: {fileID: 0}
   expPlace: {fileID: 0}
+--- !u!114 &974317616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5677299985429694792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc2b5e7d13aa39449a5cd5732fd294dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingKids: 0
+  currentKids: 0

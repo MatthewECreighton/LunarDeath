@@ -14,10 +14,10 @@ public class destroyOnImpact : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moonObj = GameObject.Find("MoonObj");
+        moonObj = GameObject.Find("HexMoon");
         
         moonY = (int) moonObj.transform.localScale.y;
-        transform.localScale = new Vector3(blastRadius*2, moonY, blastRadius*2);
+        transform.localScale = new Vector3(blastRadius*2, moonY*2, blastRadius*2);
     }
 
     // Update is called once per frame
@@ -26,7 +26,17 @@ public class destroyOnImpact : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision collision)
+     private void OnTriggerEnter(Collider collision)
+    {
+        //Destroy(gameObject);
+        if (collision.gameObject.tag == "Moon")
+        {           
+            Destroy(collision.gameObject);
+            StartCoroutine(moonObj.transform.GetComponent<MoonHealthScript>().CountCurrentChildren());
+        }
+    }
+
+    /*void OnCollisionEnter(Collision collision)
     {
         
         //Destroy(gameObject);
@@ -36,5 +46,5 @@ public class destroyOnImpact : MonoBehaviour
             StartCoroutine(moonObj.transform.GetComponent<MoonHealthScript>().CountCurrentChildren());
         }
         
-    }
+    }*/
 }
