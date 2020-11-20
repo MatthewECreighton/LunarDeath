@@ -9,7 +9,7 @@ public class destroyOnImpact : MonoBehaviour
 
     public float blastRadius = 6;
     private float moonY;
-    private GameObject moonObj;
+    public GameObject moonObj;
     
     // Start is called before the first frame update
     void Start()
@@ -26,13 +26,14 @@ public class destroyOnImpact : MonoBehaviour
         
     }
 
-     private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter(Collider collision)
     {
         //Destroy(gameObject);
         if (collision.gameObject.tag == "Moon")
         {           
             Destroy(collision.gameObject);
             StartCoroutine(moonObj.transform.GetComponent<MoonHealthScript>().CountCurrentChildren());
+            //Destroy(gameObject);
         }
     }
 

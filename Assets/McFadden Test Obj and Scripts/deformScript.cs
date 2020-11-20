@@ -42,7 +42,7 @@ public class deformScript : MonoBehaviour
         foreach (ContactPoint point in collision.contacts) 
             {
                 // Index with the closest distance to point.
-                int lastIndex = 0;
+                //int lastIndex = 0;
                 // Loop through mesh coordinates
                 for (int i = 0; i < meshCoordinates.Length; i++) 
                     {
