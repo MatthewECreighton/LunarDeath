@@ -195,12 +195,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aa405199183a84342a3e0c2b1d6a30f1, type: 3}
---- !u!1 &301771252 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3403063977507715603, guid: d08d793a411ab5f448ea9bd61fb222d4,
-    type: 3}
-  m_PrefabInstance: {fileID: 8334840845092392556}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &361738783
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,6 +353,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4951205381953691184}
   m_PrefabAsset: {fileID: 0}
+--- !u!135 &768758316
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 768758315}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &768758318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -513,22 +520,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e9628659a3803e408e2b2691060937f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exp: {fileID: 301771252}
+  exp: {fileID: 3403063977507715603, guid: d08d793a411ab5f448ea9bd61fb222d4, type: 3}
+  maxSpeed: 7
+  boomSize: 0
+  speed: 0
+  distToMoonCenter: 1
   distMult: 0
---- !u!136 &1634234160
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1634234151}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2.78
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!1001 &4951205381953691184
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -601,6 +598,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HexMoon
       objectReference: {fileID: 0}
+    - target: {fileID: 5221746601617011219, guid: bd8625bf2c87ea840828b608dda06dbb,
+        type: 3}
+      propertyPath: m_TagString
+      value: MoonParent
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd8625bf2c87ea840828b608dda06dbb, type: 3}
 --- !u!1001 &8334840845092392556
@@ -613,6 +615,11 @@ PrefabInstance:
     - target: {fileID: 3403063977507715603, guid: d08d793a411ab5f448ea9bd61fb222d4,
         type: 3}
       propertyPath: m_Name
+      value: Explosion
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403063977507715603, guid: d08d793a411ab5f448ea9bd61fb222d4,
+        type: 3}
+      propertyPath: m_TagString
       value: Explosion
       objectReference: {fileID: 0}
     - target: {fileID: 3403063977507715609, guid: d08d793a411ab5f448ea9bd61fb222d4,
@@ -669,6 +676,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90.00001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3403063977507715612, guid: d08d793a411ab5f448ea9bd61fb222d4,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d08d793a411ab5f448ea9bd61fb222d4, type: 3}

@@ -8,15 +8,26 @@ public class RocketHitScript : MonoBehaviour
     public GameObject exp;
     private GameObject exp1;
     private bool boom = true;
-    private float boomSize;
     private Vector3 startSpot;
     private Quaternion startRotation;
     private Transform moonSpot;
-    private float distToMoonCenter = 1;
+    private GameObject col;
+    private bool rayCheck = false;
+    private GameObject[] expObj;
+    public float maxSpeed = 7;
+    public float maxFuel = 1;
+    private float fuel = 1;
+
+    //explosion size calc vars
+    public float boomSize = 1;
+    public float speed = 1;
+    public float distToMoonCenter = 1;
     public float distMult = 1;
+    public float fuelMult = 1;
+    public float angleMult = 1;
+    
 
     //private float speedPerSec;
-    private float speed;
     //private Vector3 oldPosition;
 
     // Start is called before the first frame update
@@ -41,49 +52,102 @@ public class RocketHitScript : MonoBehaviour
             transform.position = startSpot;
             transform.rotation = startRotation;
         }
+        
+        Debug.DrawRay(transform.position, transform.forward*-1, Color.green);  
 
+        if(rayCheck == true)
+        {
+            Ray ray = new Ray(transform.position, transform.forward*-1);
+            RaycastHit hit;          
+            print("In the moon");
+
+            if (Physics.Raycast(transform.position, transform.forward*-1, out hit, 10))
+            {            
+                //colPoint = hit.point;       
+                if (hit.transform.gameObject.tag == "Moon")
+                {
+                    col = hit.transform.gameObject;                
+                    StartCoroutine(explode());
+                }
+            } 
+        }
     }
 
     private void OnTriggerEnter(Collider collision)
     {
-        //Destroy(gameObject);
+        col = collision.gameObject;
+
+        if (collision.gameObject.tag == "MoonParent" && boom == true)
+        {
+            rayCheck = true;                       
+        }
+
+        //create the explosion
         if (collision.gameObject.tag == "Moon" && boom == true)
-        {                      
-
-            Quaternion spawnRotation = Quaternion.Euler(90,0,0);
-
-            Rigidbody rb = GetComponent<Rigidbody>();
-            Vector3 rockVel = rb.velocity;
-            speed = rockVel.magnitude;
-
-            //a blast radius of 6 is a pretty good size
-            //blast radius = speed * fuel remaining * distance to center of moon * angle of collision            
-            moonSpot = exp.GetComponent<destroyOnImpact>().moonObj.transform;
-            distToMoonCenter = Vector3.Distance(moonSpot.position, collision.transform.position);
-            distMult = moonSpot.localScale.x / distToMoonCenter;
-
-            boomSize = speed;// * distMult;
-
-            if (boomSize > 6)
-            {
-                boomSize = 6;
-            }
-            exp.GetComponent<destroyOnImpact>().blastRadius = boomSize;
-            exp1 = Instantiate(exp, collision.GetComponent<MeshRenderer>().bounds.center, spawnRotation);
-
-            StartCoroutine(expDie());
-
+        {                    
+            StartCoroutine(explode());
             boom = false;
-            //StartCoroutine(moonObj.transform.GetComponent<MoonHealthScript>().CountCurrentChildren());
-
             Destroy(collision.gameObject);
         }
+    }
+
+    IEnumerator explode()
+    {
+        yield return new WaitForSeconds(.001F);
+        Quaternion spawnRotation = Quaternion.Euler(90,0,0);
+
+        
+        //blast radius = speed * fuel remaining * distance to center of moon * angle of collision  
+
+        //calculate speed
+        Rigidbody rb = GetComponent<Rigidbody>();
+        Vector3 rockVel = rb.velocity;
+        speed = rockVel.magnitude;
+
+        if (speed > maxSpeed)
+        {
+            speed = maxSpeed;
+        }
+
+        //calculate distance to center of moon  
+        moonSpot = GameObject.Find("HexMoon").transform;
+        distToMoonCenter = Vector3.Distance(transform.position, moonSpot.position);
+        distMult = moonSpot.localScale.x / distToMoonCenter;
+        distMult /= 2;
+
+        //fuel calc
+        fuelMult = fuel/maxFuel;
+
+        //calculate angle of collision
+
+        //calculate the size of the explosion
+        boomSize = speed * distMult * fuelMult * angleMult;
+
+        //a blast radius of 6 is a pretty good size
+        /*if (boomSize > 6)
+        {
+            boomSize = 6;
+        }*/
+        exp.GetComponent<destroyOnImpact>().blastRadius = boomSize;
+        exp1 = Instantiate(exp, col.GetComponent<MeshRenderer>().bounds.center, spawnRotation);
+
+        rayCheck = false;
+        
+        StartCoroutine(expDie());
     }
 
     IEnumerator expDie()
     {
         yield return new WaitForSeconds(.001F); 
-        Destroy(exp1);
+
+        expObj = GameObject.FindGameObjectsWithTag ("Explosion");
+     
+        for(var i = 0 ; i < expObj.Length ; i ++)
+        {
+            Destroy(expObj[i]);
+        }
+
+        //Destroy(exp1);
         boom = true;
     }
 
