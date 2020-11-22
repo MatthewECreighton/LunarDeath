@@ -18,6 +18,12 @@ public class RocketHitScript : MonoBehaviour
     public float maxFuel = 1;
     private float fuel = 1;
 
+
+    //calculate angles
+    //https://answers.unity.com/questions/848244/find-out-direction-vector-of-movement.html
+    //public float colAngle;
+    //private float[] colPoint;
+
     //explosion size calc vars
     public float boomSize = 1;
     public float speed = 1;
@@ -77,6 +83,8 @@ public class RocketHitScript : MonoBehaviour
     {
         col = collision.gameObject;
 
+        //colPoint = Collision.contacts[0].point
+
         if (collision.gameObject.tag == "MoonParent" && boom == true)
         {
             rayCheck = true;                       
@@ -93,7 +101,7 @@ public class RocketHitScript : MonoBehaviour
 
     IEnumerator explode()
     {
-        yield return new WaitForSeconds(.001F);
+        yield return new WaitForSeconds(.1F);
         Quaternion spawnRotation = Quaternion.Euler(90,0,0);
 
         
