@@ -12,27 +12,7 @@ public class RocketHitScript : MonoBehaviour
     private Vector3 startSpot;
     private Quaternion startRotation;
     private Transform moonSpot;
-<<<<<<< HEAD
-    private GameObject col;
-    private bool rayCheck = false;
-    private GameObject[] expObj;
-    public float maxSpeed = 7;
-    public float maxFuel = 1;
-    private float fuel = 1;
-
-
-    //calculate angles
-    //https://answers.unity.com/questions/848244/find-out-direction-vector-of-movement.html
-    //public float colAngle;
-    //private float[] colPoint;
-
-    //explosion size calc vars
-    public float boomSize = 1;
-    public float speed = 1;
-    public float distToMoonCenter = 1;
-=======
     private float distToMoonCenter = 1;
->>>>>>> parent of 65f1207... Moon Hollow and blast radius
     public float distMult = 1;
 
     //private float speedPerSec;
@@ -66,31 +46,11 @@ public class RocketHitScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-<<<<<<< HEAD
-        col = collision.gameObject;
-
-        //colPoint = Collision.contacts[0].point
-
-        if (collision.gameObject.tag == "MoonParent" && boom == true)
-        {
-            rayCheck = true;                       
-        }
-
-        //create the explosion
-=======
         //Destroy(gameObject);
->>>>>>> parent of 65f1207... Moon Hollow and blast radius
         if (collision.gameObject.tag == "Moon" && boom == true)
         {                      
 
-<<<<<<< HEAD
-    IEnumerator explode()
-    {
-        yield return new WaitForSeconds(.1F);
-        Quaternion spawnRotation = Quaternion.Euler(90,0,0);
-=======
             Quaternion spawnRotation = Quaternion.Euler(90,0,0);
->>>>>>> parent of 65f1207... Moon Hollow and blast radius
 
             Rigidbody rb = GetComponent<Rigidbody>();
             Vector3 rockVel = rb.velocity;
