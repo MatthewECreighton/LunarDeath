@@ -38,6 +38,7 @@ public class MoonHealthScript : MonoBehaviour
         Debug.Log(currentKids);
         
         yield return new WaitForSeconds(2F); 
+        //StartCoroutine(CountCurrentChildren());
     }
 
 }
