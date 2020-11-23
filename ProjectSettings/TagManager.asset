@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Space
   - Moon
+  - Explosion
+  - MoonParent
   layers:
   - Default
   - TransparentFX
