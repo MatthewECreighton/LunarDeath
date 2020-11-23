@@ -14,7 +14,10 @@ public class destroyOnImpact : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moonObj = GameObject.Find("HexMoon");
+        //moonObj = GameObject.Find("brokenSphere1k");
+        moonObj = GameObject.FindGameObjectWithTag("MoonParent");
+        //moonObj = GameObject.Find("brokenSphere3k");
+        //moonObj = GameObject.Find("HexMoon");
         
         moonY = (int) moonObj.transform.localScale.y;
         transform.localScale = new Vector3(blastRadius*2, moonY*2, blastRadius*2);
