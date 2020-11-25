@@ -18,6 +18,11 @@ public class RocketHitScript : MonoBehaviour
     public float maxFuel = 1;
     private float fuel = 1;
 
+    public GameObject ExplosionSys;
+    private GameObject ExpSys;
+    private Vector3 direction;
+    private Quaternion look;
+
     //explosion size calc vars
     public float boomSize = 1;
     public float speed = 1;
@@ -68,7 +73,15 @@ public class RocketHitScript : MonoBehaviour
                 if (hit.transform.gameObject.tag == "Moon")
                 {                    
                     print("Trying to shoot moon");
-                    col = hit.transform.gameObject;                
+                    col = hit.transform.gameObject;      
+                    
+                    //create moon explosion
+                    //find the vector pointing from our position to the target
+                    direction = (transform.position - hit.transform.position).normalized;            
+                    //create the rotation we need to be in to look at the target
+                    look = Quaternion.LookRotation(direction);
+                    ExpSys = Instantiate(ExplosionSys, hit.point, look);
+
                     StartCoroutine(explode());
                 }
             } 
@@ -87,7 +100,15 @@ public class RocketHitScript : MonoBehaviour
         //create the explosion
         if (collision.gameObject.tag == "Moon" && boom == true)
         {                 
-        print("hitting it");  
+            print("hitting it");  
+            
+            //create moon explosion
+            //find the vector pointing from our position to the target
+            direction = (transform.position - collision.transform.position).normalized;    
+            //create the rotation we need to be in to look at the target
+            look = Quaternion.LookRotation(direction);
+            ExpSys = Instantiate(ExplosionSys, transform.position, look);
+
             StartCoroutine(explode());
             boom = false;
             Destroy(collision.gameObject);
@@ -152,9 +173,17 @@ public class RocketHitScript : MonoBehaviour
         {
             Destroy(expObj[i]);
         }
+        StartCoroutine(expPartDie());
 
         //Destroy(exp1);
         boom = true;
+    }
+
+    IEnumerator expPartDie()
+    {
+        yield return new WaitForSeconds(1F); 
+
+        Destroy(ExpSys);
     }
 
 }
