@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class KeyboardMovement : MonoBehaviour
 {
-    public float forceMultiplier;
+    public float ForceMultiplier;
+    public float Fuel = 100;
+    public float FuelConsumptionRate = 0.01f;
+
     private bool isColliding;
     private Rigidbody myRigidbody;
     private Collider myCollider;
@@ -35,8 +38,15 @@ public class KeyboardMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-            var force = forceMultiplier * Time.deltaTime * 10;
-            myRigidbody.AddRelativeForce(new Vector3(0, force, 0));
+            var force = ForceMultiplier * Time.deltaTime * 10;
+
+            if (Fuel > 0) 
+            {
+                myRigidbody.AddRelativeForce(new Vector3(0, force, 0));
+                Fuel -= (force * FuelConsumptionRate);
+            }
+
+            Debug.Log(Fuel);
         }
     }
 
