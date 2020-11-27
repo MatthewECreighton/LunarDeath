@@ -37,9 +37,13 @@ public class destroyOnImpact : MonoBehaviour
             
             Destroy(collision.gameObject);
             StartCoroutine(moonObj.transform.GetComponent<MoonHealthScript>().CountCurrentChildren());
+            //StartCoroutine(delayCount());
+            
             //Destroy(gameObject);
         }
     }
+
+
 
     /*void OnCollisionEnter(Collision collision)
     {

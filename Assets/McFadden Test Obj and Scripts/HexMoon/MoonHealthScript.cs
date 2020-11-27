@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class MoonHealthScript : MonoBehaviour
 {
-    public int startingKids;
-    public int currentKids;
-    //public int healthPercentage;
+    public float startingKids;
+    public float currentKids;
+    public float win = 50F;
+    public float healthPercentage;
     
     // Start is called before the first frame update
     void Start()
@@ -18,7 +19,7 @@ public class MoonHealthScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     IEnumerator CountChildren()
@@ -26,6 +27,7 @@ public class MoonHealthScript : MonoBehaviour
         yield return new WaitForSeconds(1F); 
 
         startingKids = transform.childCount;
+        currentKids = transform.childCount;
         
         Debug.Log(startingKids);
     }
@@ -33,12 +35,39 @@ public class MoonHealthScript : MonoBehaviour
     public IEnumerator CountCurrentChildren()
     {
 
-        currentKids = transform.childCount;
-        //healthPercentage = currentKids/startingKids*100;
-        Debug.Log(currentKids);
+        /*currentKids = transform.childCount;
+        healthPercentage = currentKids/startingKids*100;
+        Debug.Log("Moon health: " + healthPercentage);*/
         
-        yield return new WaitForSeconds(2F); 
+        StartCoroutine(FinalCount());
+        yield return new WaitForSeconds(.1F); 
         //StartCoroutine(CountCurrentChildren());
+    }
+
+    IEnumerator FinalCount()
+    {
+        yield return new WaitForSeconds(.1F);
+
+        currentKids = transform.childCount;
+        healthPercentage = currentKids/startingKids*100;
+        Debug.Log("Percentage of Moon Remaining: " + healthPercentage + "%");
+                       
+        if (healthPercentage <= win)
+                {
+                    //win game
+                    Debug.Log("You blew up more than 50% of the moon! You Win!");
+                    //yield return new WaitForSeconds(.1F);
+                }
+        /*while (true)
+        {
+            if (healthPercentage <= win)
+                {
+                    //win game
+                    Debug.Log("You blew up more than 50% of the moon! You Win!");
+                    //yield return new WaitForSeconds(.1F);
+                }
+                yield return null;
+        }*/
     }
 
 }
