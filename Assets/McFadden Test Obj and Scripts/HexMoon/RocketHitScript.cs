@@ -17,6 +17,7 @@ public class RocketHitScript : MonoBehaviour
     public float maxSpeed = 7;
     public float maxFuel = 1;
     private float fuel = 1;
+    private float minFuelBoom = .4F;
 
     public GameObject ExplosionSys;
     private GameObject ExpSys;
@@ -41,6 +42,8 @@ public class RocketHitScript : MonoBehaviour
         //oldPosition = transform.position;
         startSpot = transform.position;
         startRotation = transform.rotation;
+        fuel = transform.GetComponent<KeyboardMovement>().Fuel;
+        maxFuel = fuel;
     }
 
     // Update is called once per frame
@@ -58,7 +61,7 @@ public class RocketHitScript : MonoBehaviour
             transform.rotation = startRotation;
         }
         
-        Debug.DrawRay(transform.position, transform.forward*-1, Color.green);  
+        //Debug.DrawRay(transform.position, transform.forward*-1, Color.green);  
 
         if(rayCheck == true)
         {
@@ -107,7 +110,8 @@ public class RocketHitScript : MonoBehaviour
             direction = (transform.position - collision.transform.position).normalized;    
             //create the rotation we need to be in to look at the target
             look = Quaternion.LookRotation(direction);
-            ExpSys = Instantiate(ExplosionSys, transform.position, look);
+            
+            ExpSys = Instantiate(ExplosionSys, collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position), look);
 
             StartCoroutine(explode());
             boom = false;
@@ -119,7 +123,6 @@ public class RocketHitScript : MonoBehaviour
     {
         yield return new WaitForSeconds(.001F);
         Quaternion spawnRotation = Quaternion.Euler(90,0,0);
-
         
         //blast radius = speed * fuel remaining * distance to center of moon * angle of collision  
 
@@ -143,7 +146,8 @@ public class RocketHitScript : MonoBehaviour
         distMult /= 2;
 
         //fuel calc
-        fuelMult = fuel/maxFuel;
+        fuel = transform.GetComponent<KeyboardMovement>().Fuel;
+        fuelMult = (fuel/maxFuel) + minFuelBoom;
 
         //calculate angle of collision
 
