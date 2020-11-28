@@ -15,6 +15,8 @@ public class RocketHitScript : MonoBehaviour
     private bool rayCheck = false;
     private GameObject[] expObj;
     public float maxSpeed = 7;
+    public int lives = 3;
+
     public float maxFuel = 1;
     private float fuel = 1;
     private float minFuelBoom = .4F;
@@ -55,10 +57,12 @@ public class RocketHitScript : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Return))
         {            
-            transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            /*transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
             transform.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             transform.position = startSpot;
             transform.rotation = startRotation;
+            transform.GetComponent<KeyboardMovement>().Fuel = fuel;*/
+            StartCoroutine(reset());
         }
         
         //Debug.DrawRay(transform.position, transform.forward*-1, Color.green);  
@@ -84,7 +88,7 @@ public class RocketHitScript : MonoBehaviour
                     //create the rotation we need to be in to look at the target
                     look = Quaternion.LookRotation(direction);
                     ExpSys = Instantiate(ExplosionSys, hit.point, look);
-
+                    
                     StartCoroutine(explode());
                 }
             } 
@@ -112,11 +116,30 @@ public class RocketHitScript : MonoBehaviour
             look = Quaternion.LookRotation(direction);
             
             ExpSys = Instantiate(ExplosionSys, collision.gameObject.GetComponent<Collider>().ClosestPointOnBounds(transform.position), look);
-
+            
             StartCoroutine(explode());
             boom = false;
             Destroy(collision.gameObject);
         }
+    }
+
+    IEnumerator reset()
+    {
+        transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        transform.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+        transform.position = startSpot;
+        transform.rotation = startRotation;
+        transform.GetComponent<KeyboardMovement>().Fuel = maxFuel;
+        if (lives != 0)
+        {            
+            lives -= 1;
+            Debug.Log("You have " + lives + " Rockets remaining!");
+        }
+        else
+        {
+            Debug.Log("You are out of Rockets!");
+        }
+        yield return new WaitForSeconds(.001F);
     }
 
     IEnumerator explode()
@@ -163,7 +186,6 @@ public class RocketHitScript : MonoBehaviour
         exp1 = Instantiate(exp, col.GetComponent<MeshRenderer>().bounds.center, spawnRotation);
 
         rayCheck = false;
-        
         StartCoroutine(expDie());
     }
 
@@ -178,7 +200,8 @@ public class RocketHitScript : MonoBehaviour
             Destroy(expObj[i]);
         }
         StartCoroutine(expPartDie());
-
+        
+        StartCoroutine(reset());
         //Destroy(exp1);
         boom = true;
     }
