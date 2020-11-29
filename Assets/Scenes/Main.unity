@@ -224,6 +224,34 @@ PrefabInstance:
       propertyPath: maxSpeed
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1926951845, guid: b2a8270f3f7c03b46a2eb9efdce65252, type: 3}
+      propertyPath: boomSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926951845, guid: b2a8270f3f7c03b46a2eb9efdce65252, type: 3}
+      propertyPath: speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926951845, guid: b2a8270f3f7c03b46a2eb9efdce65252, type: 3}
+      propertyPath: distMult
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926951846, guid: b2a8270f3f7c03b46a2eb9efdce65252, type: 3}
+      propertyPath: m_Radius
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926951846, guid: b2a8270f3f7c03b46a2eb9efdce65252, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926951846, guid: b2a8270f3f7c03b46a2eb9efdce65252, type: 3}
+      propertyPath: m_Center.y
+      value: 0.39
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926951846, guid: b2a8270f3f7c03b46a2eb9efdce65252, type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 842552392261130643, guid: b2a8270f3f7c03b46a2eb9efdce65252,
         type: 3}
       propertyPath: m_Name

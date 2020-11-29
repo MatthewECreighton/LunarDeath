@@ -9,6 +9,12 @@ public class AsteroidControllerScript : MonoBehaviour
     public float stepSpeed = 1.0F;
     public float scale = 1.0f;
     private float randSp;
+
+    private Renderer renderers;
+    private Vector3 viewportPosition;
+    private bool isWrappingX = false;
+    private bool isWrappingY = false;
+    private bool isVis = true;
     
     private Vector3 RandomVector(float min, float max) 
     {
@@ -35,19 +41,61 @@ public class AsteroidControllerScript : MonoBehaviour
 
         var rb = GetComponent<Rigidbody>();
         rb.velocity = RandomVector(-5f, 5f)*randSp;
+
+        
+        //wrapping code
+        renderers = transform.GetComponent<Renderer>();
+        var cam = Camera.main; 
+        viewportPosition = cam.WorldToViewportPoint(transform.position);
+
         /*//set random speed 
         stepSpeed *= Random.Range(1,3);*/
 
-        //StartCoroutine(moving());
+        //StartCoroutine(reposition());
+
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(renderers.isVisible)
+        {
+            isVis = true;
+            isWrappingX = false;
+            isWrappingY = false;
+            Debug.Log("isVis = true");
+        }      
+        else
+        {
+            isVis = false;
+            
+            Debug.Log("isVis = false");
+        }  
+
+        var newPosition = transform.position;
+    
+        if (isWrappingX == false && (viewportPosition.x > 1 || viewportPosition.x < 0))
+        {
+            newPosition.x = -newPosition.x;
+    
+            isWrappingX = true;
+            Debug.Log("wrapping");
+        }
+    
+        if (isWrappingY == false && (viewportPosition.y > 1 || viewportPosition.y < 0))
+        {
+            newPosition.y = -newPosition.y;
+    
+            isWrappingY = true;
+            Debug.Log("wrapping");
+        }
+    
+        transform.position = newPosition;
+
     }
 
-    /*IEnumerator moving()
+    /*IEnumerator reposition()
     {      
         yield return new WaitForSeconds(stepSpeed);   
 

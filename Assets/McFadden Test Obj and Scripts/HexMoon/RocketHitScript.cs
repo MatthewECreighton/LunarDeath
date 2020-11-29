@@ -14,7 +14,7 @@ public class RocketHitScript : MonoBehaviour
     private GameObject col;
     private bool rayCheck = false;
     private GameObject[] expObj;
-    public float maxSpeed = 7;
+    public float maxSpeed = 3;
     public int lives = 3;
 
     public float maxFuel = 1;
