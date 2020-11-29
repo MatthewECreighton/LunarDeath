@@ -159,6 +159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exp: {fileID: 3403063977507715603, guid: d08d793a411ab5f448ea9bd61fb222d4, type: 3}
   maxSpeed: 7
+  lives: 3
   maxFuel: 1
   ExplosionSys: {fileID: 7105361583180290415, guid: c10f4130d7d0e2a46a29b6be0fdc3a62,
     type: 3}
@@ -774,7 +775,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.8
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -790,7 +791,7 @@ ParticleSystem:
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 0
+          value: 0.2702711
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -5008,6 +5009,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8de495093c980814fa479c12dae5d477,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2dabac2fdafa8d84eb34adbf8ee2d681, type: 2}
     - target: {fileID: 919132149155446097, guid: 8de495093c980814fa479c12dae5d477,
         type: 3}
       propertyPath: m_Name
