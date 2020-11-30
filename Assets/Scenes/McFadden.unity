@@ -88851,6 +88851,25 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.038005326
   m_Center: {x: -0.30805415, y: -0.9480946, z: 0.100713134}
+--- !u!1 &1502462055 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7858317042053306689, guid: 524dd0e9ef8bbfb48ad9a2abdeb71d37,
+    type: 3}
+  m_PrefabInstance: {fileID: 7047905162351835055}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &1502462059
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1502462055}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1502483076 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1148647276716956445, guid: f7a02a1b245561b489d5b84f6a10bcb6,
@@ -94371,6 +94390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exp: {fileID: 3403063977507715603, guid: d08d793a411ab5f448ea9bd61fb222d4, type: 3}
   maxSpeed: 7
+  lives: 3
   maxFuel: 1
   ExplosionSys: {fileID: 7105361583180290415, guid: c10f4130d7d0e2a46a29b6be0fdc3a62,
     type: 3}

@@ -10,11 +10,12 @@ public class AsteroidControllerScript : MonoBehaviour
     public float scale = 1.0f;
     private float randSp;
 
-    private Renderer renderers;
+    private Renderer rend;
     private Vector3 viewportPosition;
     private bool isWrappingX = false;
     private bool isWrappingY = false;
-    private bool isVis = true;
+    //private bool isVis = true;
+    private Vector3 newPosition;
     
     private Vector3 RandomVector(float min, float max) 
     {
@@ -28,7 +29,7 @@ public class AsteroidControllerScript : MonoBehaviour
     void Start()
     {
         scale = Random.Range(.25f,3.0f);
-        randSp = Random.Range(.1F, .5F);
+        randSp = Random.Range(.1F, 1F);
         
         //get random size (need to be Vector3 not Vector2) if you want to just change x scale 
         Vector3 randomSize = new Vector3 (scale,scale,scale);
@@ -44,61 +45,48 @@ public class AsteroidControllerScript : MonoBehaviour
 
         
         //wrapping code
-        renderers = transform.GetComponent<Renderer>();
+        rend = transform.GetComponent<Renderer>();
         var cam = Camera.main; 
         viewportPosition = cam.WorldToViewportPoint(transform.position);
-
-        /*//set random speed 
-        stepSpeed *= Random.Range(1,3);*/
-
-        //StartCoroutine(reposition());
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(renderers.isVisible)
+        newPosition = transform.position;
+        viewportPosition = Camera.main.WorldToViewportPoint(transform.position);
+
+        if(rend.isVisible)
         {
-            isVis = true;
+            //isVis = true;
             isWrappingX = false;
             isWrappingY = false;
             Debug.Log("isVis = true");
         }      
         else
         {
-            isVis = false;
-            
+            //isVis = false;            
             Debug.Log("isVis = false");
-        }  
-
-        var newPosition = transform.position;
+        } 
     
-        if (isWrappingX == false && (viewportPosition.x > 1 || viewportPosition.x < 0))
+        if (isWrappingX == false && (viewportPosition.x > 1.1 || viewportPosition.x < -.1))
         {
-            newPosition.x = -newPosition.x;
+            //newPosition.x = -newPosition.x;
+            newPosition.x = -Camera.main.ScreenToWorldPoint(newPosition).x;
     
             isWrappingX = true;
             Debug.Log("wrapping");
         }
     
-        if (isWrappingY == false && (viewportPosition.y > 1 || viewportPosition.y < 0))
+        if (isWrappingY == false && (viewportPosition.y > 1.1 || viewportPosition.y < -.1))
         {
-            newPosition.y = -newPosition.y;
+            //newPosition.y = -newPosition.y;
+            newPosition.y = -Camera.main.ScreenToWorldPoint(newPosition).y;
     
             isWrappingY = true;
             Debug.Log("wrapping");
         }
     
         transform.position = newPosition;
-
     }
-
-    /*IEnumerator reposition()
-    {      
-        yield return new WaitForSeconds(stepSpeed);   
-
-        StartCoroutine(moving());
-    }*/
 }
