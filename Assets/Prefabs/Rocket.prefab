@@ -158,7 +158,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   exp: {fileID: 3403063977507715603, guid: d08d793a411ab5f448ea9bd61fb222d4, type: 3}
-  maxSpeed: 7
+  maxSpeed: 3
   lives: 3
   maxFuel: 1
   ExplosionSys: {fileID: 7105361583180290415, guid: c10f4130d7d0e2a46a29b6be0fdc3a62,

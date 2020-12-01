@@ -45,8 +45,6 @@ public class KeyboardMovement : MonoBehaviour
                 myRigidbody.AddRelativeForce(new Vector3(0, force, 0));
                 Fuel -= (force * FuelConsumptionRate);
             }
-
-            Debug.Log(Fuel);
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RocketHitScript : MonoBehaviour
 {
@@ -55,7 +56,7 @@ public class RocketHitScript : MonoBehaviour
         speed = Vector3.Distance (oldPosition, transform.position);
         oldPosition = transform.position;*/
 
-        if (Input.GetKey(KeyCode.Return))
+        if (transform.position.y < 0 || transform.position.x < -100 || transform.position.x > 50)
         {            
             /*transform.GetComponent<Rigidbody>().velocity = Vector3.zero;
             transform.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
@@ -63,6 +64,16 @@ public class RocketHitScript : MonoBehaviour
             transform.rotation = startRotation;
             transform.GetComponent<KeyboardMovement>().Fuel = fuel;*/
             StartCoroutine(reset());
+        }
+
+        if (Input.GetKey(KeyCode.Return))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Application.Quit();
         }
         
         //Debug.DrawRay(transform.position, transform.forward*-1, Color.green);  
@@ -138,6 +149,7 @@ public class RocketHitScript : MonoBehaviour
         else
         {
             Debug.Log("You are out of Rockets!");
+            transform.GetComponent<KeyboardMovement>().Fuel = 0;
         }
         yield return new WaitForSeconds(.001F);
     }
