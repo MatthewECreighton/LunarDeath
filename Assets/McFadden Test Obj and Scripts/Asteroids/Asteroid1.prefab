@@ -127,6 +127,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stepSpeed: 1
   scale: 1
+  asteroids:
+  - {fileID: 3187290419312259450, guid: a52ea8d82438175449cfe7e087e5978c, type: 3}
+  - {fileID: 2066329468194098004}
+  - {fileID: 1978839418033082757, guid: 1820fe2a08b55eb478ca06ee7f6187d2, type: 3}
+  - {fileID: 3891286102993915693, guid: 5ceb1b5fdcac1514296ae754a8369305, type: 3}
 --- !u!135 &919132148153932369
 SphereCollider:
   m_ObjectHideFlags: 0

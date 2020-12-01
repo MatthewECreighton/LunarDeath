@@ -12,10 +12,11 @@ public class AsteroidControllerScript : MonoBehaviour
 
     private Renderer rend;
     private Vector3 viewportPosition;
-    private bool isWrappingX = false;
-    private bool isWrappingY = false;
+    private bool isWrappingX = true;
+    private bool isWrappingY = true;
     //private bool isVis = true;
     private Vector3 newPosition;
+    public GameObject[] asteroids;
     
     private Vector3 RandomVector(float min, float max) 
     {
@@ -29,7 +30,9 @@ public class AsteroidControllerScript : MonoBehaviour
     void Start()
     {
         scale = Random.Range(.25f,3.0f);
-        randSp = Random.Range(.1F, 1F);
+        randSp = Random.Range(.75F, 1.5F);
+
+        StartCoroutine(spawn());
         
         //get random size (need to be Vector3 not Vector2) if you want to just change x scale 
         Vector3 randomSize = new Vector3 (scale,scale,scale);
@@ -56,6 +59,54 @@ public class AsteroidControllerScript : MonoBehaviour
         newPosition = transform.position;
         viewportPosition = Camera.main.WorldToViewportPoint(transform.position);
 
+        /*if(rend.isVisible)
+        {
+            //isVis = true;
+            isWrappingX = false;
+            isWrappingY = false;
+            Debug.Log("isVis = true");
+        }      
+        else
+        {
+            //isVis = false;            
+            Debug.Log("isVis = false");
+        } */
+    
+        if (isWrappingX == false && (viewportPosition.x > 1.1 || viewportPosition.x < -.1))
+        {
+            //newPosition.x = -newPosition.x;
+            //newPosition.x = -Camera.main.ScreenToWorldPoint(newPosition).x;
+            //newPosition.x = -Camera.main.ViewportToWorldPoint(viewportPosition).x;
+            
+            Instantiate (asteroids[Random.Range(0,4)], transform.position, transform.rotation);
+            Debug.Log("spawn");
+            StartCoroutine(dest());
+    
+            isWrappingX = true;
+            Debug.Log("wrapping");
+        }
+    
+        if (isWrappingY == false && (viewportPosition.y > 1.1 || viewportPosition.y < -.1))
+        {
+            //newPosition.y = -newPosition.y;
+            //newPosition.y = -Camera.main.ScreenToWorldPoint(newPosition).y;
+            //newPosition.y = -Camera.main.ViewportToWorldPoint(viewportPosition).y;
+
+            Instantiate (asteroids[Random.Range(0,4)], transform.position, transform.rotation);
+            Debug.Log("spawn");
+            //Instantiate (asteroids[Random.Range(0,4)], transform.position, transform.rotation);
+            StartCoroutine(dest());
+    
+            isWrappingY = true;
+            Debug.Log("wrapping");
+        }
+    
+        //transform.position = newPosition;
+    }
+
+    IEnumerator spawn()
+    {
+        yield return new WaitForSeconds(1F);
         if(rend.isVisible)
         {
             //isVis = true;
@@ -68,25 +119,13 @@ public class AsteroidControllerScript : MonoBehaviour
             //isVis = false;            
             Debug.Log("isVis = false");
         } 
-    
-        if (isWrappingX == false && (viewportPosition.x > 1.1 || viewportPosition.x < -.1))
-        {
-            //newPosition.x = -newPosition.x;
-            newPosition.x = -Camera.main.ScreenToWorldPoint(newPosition).x;
-    
-            isWrappingX = true;
-            Debug.Log("wrapping");
-        }
-    
-        if (isWrappingY == false && (viewportPosition.y > 1.1 || viewportPosition.y < -.1))
-        {
-            //newPosition.y = -newPosition.y;
-            newPosition.y = -Camera.main.ScreenToWorldPoint(newPosition).y;
-    
-            isWrappingY = true;
-            Debug.Log("wrapping");
-        }
-    
-        transform.position = newPosition;
+        StartCoroutine(spawn());
+
+    }
+
+    IEnumerator dest()
+    {        
+        yield return new WaitForSeconds(.1F);
+        Destroy(gameObject);
     }
 }
